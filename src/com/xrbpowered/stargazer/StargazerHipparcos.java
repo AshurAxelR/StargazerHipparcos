@@ -27,7 +27,7 @@ public class StargazerHipparcos extends UIClient {
 		windowedHeight = 1080;
 		vsync = false;
 		noVsyncSleep = 4;
-		multisample = 4;
+		multisample = 0;
 		
 		UIHudPane.initFonts();
 		

@@ -15,8 +15,8 @@ void main(void) {
 	}
 	else {
 		float d = distance(gl_PointCoord, vec2(0.5, 0.5)) * pass_Size * 2;
-		float s = pow(pass_Brightness, saturation);
-		c = d<0.1*sqrt(s) ? 100 : s / d / d;
+		if(d>pass_Size) discard;
+		c = d<0.1*sqrt(pass_Brightness) ? 100 : pass_Brightness / d / d;
 	}
 	if(c<1.0/256.0) discard;
 	out_Color = vec4(pass_Color.xyz * c, 1);

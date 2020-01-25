@@ -6,9 +6,11 @@
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 
+uniform float maxSize = 1024;
 uniform float screenHeight = 1;
 uniform float exposure = 1;
 uniform float contrast = 1;
+uniform float saturation = 1;
 
 uniform sampler2D texSpectrum;
 
@@ -23,14 +25,15 @@ out vec4 pass_Color;
 void main(void) {
 	gl_Position = projectionMatrix * viewMatrix * vec4(in_Position, 1);
 	
-	//pass_Brightness = exposure * in_Brightness;
 	pass_Brightness = 100 * exposure * pow(10, -0.4 * contrast * in_Magnitude);
 	
 	float s = sqrt(pass_Brightness);
 	float full = s;
-	if(pass_Brightness>1)
+	if(pass_Brightness>1) {
+		pass_Brightness = pow(pass_Brightness, saturation);
 		full = 16*sqrt(pass_Brightness);
-	pass_Size = max(full, 1);
+	}
+	pass_Size = min(max(full, 1), maxSize);
 	gl_PointSize = pass_Size;
 	
 	float t = (in_Temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP);
