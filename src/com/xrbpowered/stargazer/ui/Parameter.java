@@ -74,11 +74,11 @@ public class Parameter {
 		}
 	};
 	
-	public static Parameter exposure = new Parameter("Exposure", KeyEvent.VK_X, 1, 0).setDeltaStep(0.5f);
+	public static Parameter exposure = new Parameter("Exposure", KeyEvent.VK_X, 1, 0, -0.5f).setDeltaStep(0.5f);
 	
-	public static Parameter contrast = new Parameter("Mag. Exponent", KeyEvent.VK_C, 2, 0, 0.2f).setDeltaStep(0.05f);
+	public static Parameter contrast = new Parameter("Mag. Exponent", KeyEvent.VK_C, 2, 0, 0.3f).setDeltaStep(0.05f);
 	
-	public static Parameter saturation = new Parameter("Saturation", KeyEvent.VK_V, 3, 0, -0.5f) {
+	public static Parameter saturation = new Parameter("Saturation", KeyEvent.VK_V, 3, 0, -0.75f) {
 		@Override
 		protected void setValue(float v) {
 			if(v>0) v = 0;

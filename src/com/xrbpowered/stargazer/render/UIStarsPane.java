@@ -1,12 +1,15 @@
 package com.xrbpowered.stargazer.render;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.*;
 
 import java.awt.Color;
+import java.nio.IntBuffer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL32;
+import org.lwjgl.system.MemoryStack;
 
 import com.xrbpowered.gl.res.buffer.RenderTarget;
 import com.xrbpowered.gl.res.mesh.StaticMesh;
@@ -15,6 +18,7 @@ import com.xrbpowered.gl.res.shader.VertexInfo;
 import com.xrbpowered.gl.res.texture.Texture;
 import com.xrbpowered.gl.scene.CameraActor;
 import com.xrbpowered.gl.scene.Controller;
+import com.xrbpowered.gl.scene.WalkController;
 import com.xrbpowered.gl.ui.pane.UIOffscreen;
 import com.xrbpowered.stargazer.StargazerHipparcos;
 import com.xrbpowered.stargazer.data.HipparcosData;
@@ -50,7 +54,7 @@ public class UIStarsPane extends UIOffscreen {
 
 		camera = new CameraActor.Perspective().setRange(0.1f, 20f).setAspectRatio(getWidth(), getHeight());
 		
-		controller = new Controller(getClient().input).setActor(camera);
+		controller = new WalkController(getClient().input).setActor(camera);
 		controller.moveSpeed = 0f;
 		controller.setMouseLook(true);
 
@@ -75,6 +79,11 @@ public class UIStarsPane extends UIOffscreen {
 				exposureLocation  = GL20.glGetUniformLocation(pId, "exposure");
 				contrastLocation  = GL20.glGetUniformLocation(pId, "contrast");
 				saturationLocation  = GL20.glGetUniformLocation(pId, "saturation");
+				try(MemoryStack stack = stackPush()) {
+					IntBuffer pOut = stack.mallocInt(2);
+					GL11.glGetIntegerv(GL20.GL_ALIASED_POINT_SIZE_RANGE, pOut);
+					GL20.glUniform1f(GL20.glGetUniformLocation(pId, "maxSize"), (float)pOut.get(1));
+				}
 			}
 			@Override
 			public void updateUniforms() {
