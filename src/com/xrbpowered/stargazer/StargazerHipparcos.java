@@ -5,6 +5,7 @@ import static java.awt.event.KeyEvent.*;
 import org.lwjgl.glfw.GLFW;
 
 import com.xrbpowered.gl.client.UIClient;
+import com.xrbpowered.gl.ui.common.UIFpsOverlay;
 import com.xrbpowered.stargazer.render.UIStarsPane;
 import com.xrbpowered.stargazer.ui.Parameter;
 import com.xrbpowered.stargazer.ui.UIHudPane;
@@ -12,6 +13,7 @@ import com.xrbpowered.stargazer.ui.UIHudPane;
 public class StargazerHipparcos extends UIClient {
 
 	public static StargazerHipparcos client;
+	public static GlobalSettings settings;
 	
 	public static UIStarsPane stars;
 	public static UIHudPane hud;
@@ -22,12 +24,13 @@ public class StargazerHipparcos extends UIClient {
 		super("Stargazer: Hipparcos");
 		client = this;
 		
-		fullscreen = true;
-		windowedWidth = 1920;
-		windowedHeight = 1080;
-		vsync = false;
-		noVsyncSleep = 4;
+		fullscreen = settings.fullscreen;
+		windowedWidth = settings.windowedWidth;
+		windowedHeight = settings.windowedHeight;
+		vsync = settings.vsync;
+		noVsyncSleep = settings.noVsyncSleep;
 		multisample = 0;
+		getContainer().setBaseScale(settings.uiScaling);
 		
 		UIHudPane.initFonts();
 		
@@ -35,7 +38,8 @@ public class StargazerHipparcos extends UIClient {
 		hud = new UIHudPane(getContainer());
 		hud.fadeOut();
 		
-		//new UIFpsOverlay(this);
+		if(settings.showFps)
+			new UIFpsOverlay(this);
 	}
 
 	public void updateTime(float dt) {
@@ -54,6 +58,24 @@ public class StargazerHipparcos extends UIClient {
 		switch(code) {
 			case VK_ESCAPE:
 				requestExit();
+				break;
+			case VK_MINUS:
+				if(activeParameter!=null) {
+					activeParameter.update(-1);
+					hud.repaint();
+				}
+				break;
+			case VK_EQUALS:
+				if(activeParameter!=null) {
+					activeParameter.update(1);
+					hud.repaint();
+				}
+				break;
+			case VK_BACK_SPACE:
+				if(activeParameter!=null) {
+					activeParameter.reset();
+					hud.repaint();
+				}
 				break;
 		}
 	}
@@ -78,6 +100,7 @@ public class StargazerHipparcos extends UIClient {
 	
 	public static void main(String[] args) {
 		//HipparcosData.convertData();
+		settings = GlobalSettings.load();
 		new StargazerHipparcos().run();
 	}
 

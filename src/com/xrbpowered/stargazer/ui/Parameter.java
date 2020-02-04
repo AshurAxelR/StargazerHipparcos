@@ -25,8 +25,7 @@ public class Parameter {
 		this.hotkey = hotkey;
 		this.gridx = gridx;
 		this.gridy = gridy;
-		this.defaultValue = defaultValue;
-		setValue(defaultValue);
+		setDefaultValue(defaultValue);
 	}
 
 	public Parameter(String name, int hotkey, int gridx, int gridy) {
@@ -36,6 +35,25 @@ public class Parameter {
 	public Parameter setDeltaStep(float deltaStep) {
 		this.deltaStep = deltaStep;
 		return this;
+	}
+	
+	public void setDefaultValue(float defaultValue) {
+		this.defaultValue = defaultValue;
+		setValue(defaultValue);
+	}
+	
+	public void setDefaultValue(String value) {
+		if(value==null)
+			return;
+		try {
+			float x = Float.parseFloat(value);
+			if(x<0f) x += 1f;
+			else x -= 1f;
+			this.defaultValue = x;
+			setValue(defaultValue);
+		}
+		catch(NumberFormatException e) {
+		}
 	}
 	
 	protected void setValue(float v) {

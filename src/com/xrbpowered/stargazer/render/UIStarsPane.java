@@ -67,7 +67,6 @@ public class UIStarsPane extends UIOffscreen {
 		starShader = new Shader(starInfo, "points_v.glsl", "points_f.glsl") {
 			private int projectionMatrixLocation;
 			private int viewMatrixLocation;
-			private int screenHeightLocation;
 			private int exposureLocation;
 			private int contrastLocation;
 			private int saturationLocation;
@@ -75,7 +74,6 @@ public class UIStarsPane extends UIOffscreen {
 			protected void storeUniformLocations() {
 				projectionMatrixLocation = GL20.glGetUniformLocation(pId, "projectionMatrix");
 				viewMatrixLocation = GL20.glGetUniformLocation(pId, "viewMatrix");
-				screenHeightLocation  = GL20.glGetUniformLocation(pId, "screenHeight");
 				exposureLocation  = GL20.glGetUniformLocation(pId, "exposure");
 				contrastLocation  = GL20.glGetUniformLocation(pId, "contrast");
 				saturationLocation  = GL20.glGetUniformLocation(pId, "saturation");
@@ -94,7 +92,6 @@ public class UIStarsPane extends UIOffscreen {
 				glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
 				uniform(projectionMatrixLocation, camera.getProjection());
 				uniform(viewMatrixLocation, camera.getView());
-				GL20.glUniform1f(screenHeightLocation, getHeight());
 				GL20.glUniform1f(exposureLocation, Parameter.exposure.getValue() / Parameter.zoom.getValue());
 				GL20.glUniform1f(contrastLocation, Parameter.contrast.getValue());
 				GL20.glUniform1f(saturationLocation, Parameter.saturation.getValue());
@@ -116,7 +113,7 @@ public class UIStarsPane extends UIOffscreen {
 		if(camera!=null) {
 			float fov = Parameter.zoom.getValue();
 			((CameraActor.Perspective)camera).setFov(baseFov * fov);
-			controller.mouseSensitivity = 0.002f * fov;
+			controller.mouseSensitivity = StargazerHipparcos.settings.mouseSensitivity * fov;
 		}
 	}
 	
