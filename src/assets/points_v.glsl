@@ -7,7 +7,6 @@ uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 
 uniform float maxSize = 1024;
-uniform float screenHeight = 1;
 uniform float exposure = 1;
 uniform float contrast = 1;
 uniform float saturation = 1;
