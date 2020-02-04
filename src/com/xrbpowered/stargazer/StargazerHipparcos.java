@@ -60,12 +60,14 @@ public class StargazerHipparcos extends UIClient {
 				requestExit();
 				break;
 			case VK_MINUS:
+			case VK_SUBTRACT:
 				if(activeParameter!=null) {
 					activeParameter.update(-1);
 					hud.repaint();
 				}
 				break;
 			case VK_EQUALS:
+			case VK_ADD:
 				if(activeParameter!=null) {
 					activeParameter.update(1);
 					hud.repaint();
