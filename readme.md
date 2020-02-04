@@ -8,7 +8,7 @@ This application displays star positions, magnitudes, and colours. However, it d
 
 ## Download
 
-[StargazerHipparcos.zip](https://github.com/ashurrafiev/StargazerHipparcos/releases/download/1.0/StargazerHipparcos.zip) (5.36 MB)
+[StargazerHipparcos.zip](https://github.com/ashurrafiev/StargazerHipparcos/releases/download/1.1/StargazerHipparcos.zip) (5.36 MB)
 
 ## Why this app?
 
@@ -52,7 +52,10 @@ Pressing **middle mouse button** or **right mouse button** while holding a hotke
 
 UI display automatically goes away after two seconds of not being used.
 
-**ESC** exits the app, no questions asked.
+For keyboard-only controls, use **arrow keys** to look around and **plus** and **minus** keys while holding a parameter hotkey to change the parameter.
+Pressing **backspace** while holding a hotkey will reset the parameter.
+
+**Escape** exits the app, no questions asked.
 
 
 ## Math behind it
