@@ -8,7 +8,7 @@ This application displays star positions, magnitudes, and colours. However, it d
 
 ## Download
 
-[StargazerHipparcos.zip](https://github.com/ashurrafiev/StargazerHipparcos/releases/download/1.1/StargazerHipparcos.zip) (5.36 MB)
+[StargazerHipparcos.zip](https://github.com/AshurAxelR/StargazerHipparcos/releases/download/1.1/StargazerHipparcos.zip) (5.36 MB)
 
 ## Why this app?
 
