@@ -63,7 +63,7 @@ Pressing **backspace** while holding a hotkey will reset the parameter.
 We are rendering stars not as single pixels but as "glowing" circles around the centres of the stars. The brightness _B_ of a pixel depending on the star's
 apparent magnitude _M_ and the distance _D_ from the star centre is calculated using the following formula:
 
-![eq](eq.png)
+![eq](https://latex.codecogs.com/svg.image?B=\frac{\left&space;(&space;100&space;\cdot&space;f_\mathrm{exp}&space;\cdot&space;10^{-0.4&space;\cdot&space;f_\mathrm{mag}&space;\cdot&space;M}&space;\right&space;)^{f_\mathrm{sat}}}{D^2})
 
 where _f_<sub>exp</sub> is the Exposure parameter, _f_<sub>mag</sub> is the Magnitude Exponent parameter, and _f_<sub>sat</sub> is the Saturation parameter.
 
