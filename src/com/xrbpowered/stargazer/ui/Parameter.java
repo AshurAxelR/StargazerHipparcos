@@ -1,8 +1,8 @@
 package com.xrbpowered.stargazer.ui;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import com.sun.glass.events.KeyEvent;
 import com.xrbpowered.gl.client.ClientInput;
 import com.xrbpowered.stargazer.StargazerHipparcos;
 import com.xrbpowered.stargazer.render.UIStarsPane;
